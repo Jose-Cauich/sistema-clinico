@@ -31,12 +31,12 @@ public class PacienteServicio {
 
     public PacienteResponseDTO insertarPaciente(PacienteRegisterDTO dto) {
 
+        //objetos-relación
         NutriologasEntity nutriologasEntity = nutriologaRepository.findById(dto.getIdNutriologa()).orElseThrow(()->new RuntimeException("Nutrióloga no encontrada"));
         Genero genero = dto.getGenero();
 
-        PacientesEntity paciente = PacienteMapper.toEntity(dto, nutriologasEntity, genero);
-        PacientesEntity NuevoRegistro = pacienteRepository.save(paciente);
-        return PacienteMapper.toDtoGet(NuevoRegistro);
+        PacientesEntity NuevoPaciente = PacienteMapper.toEntity(dto, nutriologasEntity, genero);
+        return PacienteMapper.toDtoGet(pacienteRepository.save(NuevoPaciente));
     }
 
     @Transactional
@@ -44,13 +44,12 @@ public class PacienteServicio {
 
         PacientesEntity entity = pacienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Patient no encontrado"));
         PacienteMapper.updatePaciente(dto, entity);
-
-        //usando el @transaccional ya no uso el save
+        //usando el @transaccional ya no uso el save "Dirty checking"
 
     }
 
 
-    //usaremos @PathVariable
+    //@PathVariable
     @Transactional
     public  void desactivarPaciente(Long id) {
 

@@ -2,10 +2,12 @@ package Salud.service;
 
 import Salud.dtos.Cita.CitaGetDTO;
 import Salud.dtos.Cita.CitaPostDTO;
+import Salud.dtos.Cita.CitaPutDTO;
 import Salud.entity.CitasEntity;
 import Salud.entity.TipoCitasEntity;
 import Salud.entity.NutriologasEntity;
 import Salud.entity.PacientesEntity;
+import Salud.enums.EstadoCita;
 import Salud.mapper.CitaMapper;
 import Salud.repository.CitaRepository;
 import Salud.repository.TipoCitaRepository;
@@ -23,7 +25,7 @@ import java.util.stream.Collectors;
 public class CitaServicio {
 
     @Autowired
-    private CitaRepository CItaRepository;
+    private CitaRepository CitaRepository;
     @Autowired
     private PacienteRepository pacienteRepository;
     @Autowired
@@ -31,25 +33,28 @@ public class CitaServicio {
     @Autowired
     private TipoCitaRepository tipoCitaRepository;
 
-    public CitaGetDTO createAppointment(CitaPostDTO dto) {
+    public List<CitaGetDTO> TodasCitas(Long pacienteId) {
+        return CitaRepository.findByPatient_IdPaciente(pacienteId).stream().map(CitaMapper::toDto).collect(Collectors.toList());
+    }
+
+    public CitaGetDTO citaPaciente(Long citaId) {
+        CitasEntity nuevaCita = CitaRepository.findById(citaId).orElseThrow(() -> new RuntimeException("Cita no encontrada"));
+        return CitaMapper.toDto(nuevaCita);
+    }
+
+    public CitaGetDTO crearCita(CitaPostDTO dto) {
 
         PacientesEntity patient = pacienteRepository.findById(dto.getIdPaciente()).orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
         NutriologasEntity nutritionist = nutriologaRepository.findById(dto.getIdNutriologa()).orElseThrow(() -> new RuntimeException("Nutriólogo no encontrado"));
         TipoCitasEntity tipo = tipoCitaRepository.findById(dto.getIdTipoCita()).orElseThrow(() -> new RuntimeException("Tipo de cita no válido"));
 
-        //creo la cita y la mapeo
         CitasEntity entity = CitaMapper.toEntity(dto, patient, nutritionist, tipo);
-        CitasEntity saved = CItaRepository.save(entity);
-
-        log.info("Cita creada para el día {} a las {}", dto.getFecha(), dto.getHoraInicio());
-        return CitaMapper.toDto(saved);
+        return CitaMapper.toDto(CitaRepository.save(entity));
     }
 
-    //todas las citas
-    public List<CitaGetDTO> getAppointmentsByPatient(Long patientId) {
-        return CItaRepository.findByPatient_IdPaciente(patientId).stream().map(CitaMapper::toDto).collect(Collectors.toList());
+    public void UpdateCita(Long citaId, CitaPutDTO dto) {
+        CitasEntity cita = CitaRepository.findById(citaId).orElseThrow(() -> new RuntimeException("Cita no encontrada"));
+        CitaMapper.toEntity(dto, cita);
     }
-
-
 
 }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 public class EmpleadoMapper {
 
-    public static EmpleadosResponseDTO toDtoGet(EmpleadosEntity entity, RolEntity rol) {
+    public static EmpleadosResponseDTO toDtoGet(EmpleadosEntity entity) {
         if (entity == null) return null;
 
         EmpleadosResponseDTO dto = new EmpleadosResponseDTO();
@@ -25,13 +25,13 @@ public class EmpleadoMapper {
         dto.setCorreo(entity.getCorreo());
         dto.setTelefono(entity.getTelefono());
         dto.setFechaRegistro(entity.getFechaRegistro());
-        dto.setRol(RolesMapper.toDto(rol).getNombre());//mapper.rol
+        dto.setRol(entity.getRol().name());//THIS
         dto.setDireccion(DireccionesMapper.toDto(entity.getDireccion()));
 
         return dto;
     }
 
-    public static EmpleadosEntity toEntity(EmpleadosRegisterDTO dto, NombreRol rol, Genero genero) {
+    public static EmpleadosEntity toEntity(EmpleadosRegisterDTO dto, RolEntity rol) {
         if (dto == null) return null;
 
         EmpleadosEntity entity = new EmpleadosEntity();
@@ -44,7 +44,7 @@ public class EmpleadoMapper {
         entity.setPasswordHash(dto.getPasswordHash());
         entity.setFechaRegistro(LocalDateTime.now()); //Asignacion de tiempo de hora y fecha del sistema
         entity.setActivo(true);
-        entity.setRol(rol);
+        entity.setRol(rol.getNombreRol());
         //mapper-direccion
         entity.setDireccion(DireccionesMapper.toEntity(dto.getDireccion()));
 

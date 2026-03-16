@@ -15,15 +15,21 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TipoCitasServicio {
 
-    @Autowired
+
     private TipoCitaRepository repository;
+
+    //Inyeccion de dependencias con constructor manual
+    public TipoCitasServicio(TipoCitaRepository repository) {
+        this.repository = repository;
+    }
 
     public List<TipoCitaGetDTO> getAllTypes() {
         log.info("Consultando catálogo de tipos de cita");
         return repository.findAll().stream().map(TipoCitaMapper::toDto).collect(Collectors.toList());
     }
 
-    public TipoCitasEntity getEntityById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Tipo de cita no encontrado con ID: " + id));
+    public TipoCitaGetDTO getEntityById(Long id) {
+        TipoCitasEntity tipo = repository.findById(id).orElseThrow(() -> new RuntimeException("Tipo de cita no encontrado con ID: " + id));
+        return TipoCitaMapper.toDto(tipo);
     }
 }

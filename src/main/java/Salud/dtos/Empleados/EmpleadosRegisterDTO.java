@@ -14,7 +14,7 @@ public class EmpleadosRegisterDTO {
     private String correo;
     private String telefono;
     private String passwordHash;
-    private Integer idRol; // El ID del rol (Admin o Recepcionista)
+    private Long idRol; // El ID del rol (Admin o Recepcionista)
     private LocalDateTime fechaRegistro;
     private DireccionDTO direccion;
     private boolean activo;

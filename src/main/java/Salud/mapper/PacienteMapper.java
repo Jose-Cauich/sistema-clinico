@@ -47,7 +47,6 @@ public class PacienteMapper {
         pacientesEntity.setApellidoPaterno(pacienteRegisterDTO.getApellidoPaterno());
         pacientesEntity.setApellidoMaterno(pacienteRegisterDTO.getApellidoMaterno());
         pacientesEntity.setFechaNacimiento(pacienteRegisterDTO.getFechaNacimiento());
-        pacientesEntity.setGenero(pacienteRegisterDTO.getGenero());
         pacientesEntity.setTelefono(pacienteRegisterDTO.getTelefono());
         pacientesEntity.setCorreo(pacienteRegisterDTO.getCorreo());
         pacientesEntity.setPasswordHash(pacienteRegisterDTO.getPasswordHash());

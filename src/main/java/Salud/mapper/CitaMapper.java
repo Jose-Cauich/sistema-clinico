@@ -2,12 +2,14 @@ package Salud.mapper;
 
 import Salud.dtos.Cita.CitaGetDTO;
 import Salud.dtos.Cita.CitaPostDTO;
+import Salud.dtos.Cita.CitaPutDTO;
 import Salud.entity.CitasEntity;
 import Salud.entity.TipoCitasEntity;
 import Salud.entity.NutriologasEntity;
 import Salud.entity.PacientesEntity;
 import Salud.enums.EstadoCita;
 import Salud.enums.EstadoPago;
+import jakarta.validation.constraints.Null;
 
 
 public class CitaMapper {
@@ -46,5 +48,16 @@ public class CitaMapper {
         entity.setHoraFin(dto.getHoraFin());
 
         return entity;
+    }
+
+    public static CitasEntity toEntity(CitaPutDTO dto, CitasEntity citas) {
+        if (dto == null) return null;
+
+        if (dto.getEstadoCita() !=null)citas.setEstadoCita(EstadoCita.valueOf(dto.getEstadoCita()));
+        if (dto.getEstadoCita() != null)citas.setFecha(dto.getFecha());
+        if (dto.getHoraInicio() != null)citas.setHoraInicio(dto.getHoraInicio());
+        if (dto.getHoraFin() != null)citas.setHoraFin(dto.getHoraFin());
+
+        return citas;
     }
 }

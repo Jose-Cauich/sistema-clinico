@@ -7,6 +7,6 @@ import java.math.BigDecimal;
 public class TipoCitaGetDTO {
     private Long idTipo;
     private String descripcion;
-    private Integer duracionMinutos;
+    private Long duracionMinutos;
     private BigDecimal costo;
 }
