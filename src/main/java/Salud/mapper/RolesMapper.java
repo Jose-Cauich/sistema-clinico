@@ -1,20 +1,20 @@
 package Salud.mapper;
 
-import Salud.dtos.Rol.RolRequestDTO;
-import Salud.dtos.Rol.RolRespondseDTO;
+import Salud.dtos.Rol.RolPostDTO;
+import Salud.dtos.Rol.RolGetDTO;
 import Salud.entity.RolEntity;
 
 public class RolesMapper {
 
-    public static RolRespondseDTO toDto(RolEntity entity) {
+    public static RolGetDTO toDto(RolEntity entity) {
         if (entity == null) return null;
 
-        RolRespondseDTO dto = new RolRespondseDTO();
+        RolGetDTO dto = new RolGetDTO();
         dto.setNombre(entity.getNombreRol().name());
         return dto;
     }
 
-    public static RolEntity toEntity(RolRequestDTO dto) {
+    public static RolEntity toEntity(RolPostDTO dto) {
         if (dto == null) return null;
 
         RolEntity entity = new RolEntity();

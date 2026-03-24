@@ -6,16 +6,16 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class EmpleadosResponseDTO {
-    private Integer idPersonal; //para operaciones
+public class EmpleadosPostDTO {
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
     private LocalDateTime fechaNacimiento;
     private String correo;
     private String telefono;
-    private String nombreRol;
+    private String passwordHash;
+    private Long idRol; // El ID del rol (Admin o Recepcionista)
     private LocalDateTime fechaRegistro;
     private DireccionDTO direccion;
-    private String rol;
+    private boolean activo;
 }

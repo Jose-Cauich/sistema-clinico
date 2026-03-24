@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class PacienteRegisterDTO {
+public class PacientePostDTO {
     private Long idPaciente;
     private Long idNutriologa;
     private String nombres;

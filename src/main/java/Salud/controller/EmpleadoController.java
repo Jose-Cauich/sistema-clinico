@@ -1,7 +1,7 @@
 package Salud.controller;
 
-import Salud.dtos.Empleados.EmpleadosRegisterDTO;
-import Salud.dtos.Empleados.EmpleadosResponseDTO;
+import Salud.dtos.Empleados.EmpleadosPostDTO;
+import Salud.dtos.Empleados.EmpleadosGetDTO;
 import Salud.dtos.Empleados.EmpleadosUpdateDTO;
 import Salud.service.EmpleadoServicio;
 import lombok.RequiredArgsConstructor;
@@ -19,18 +19,18 @@ public class EmpleadoController {
     private final EmpleadoServicio empleadoServicio;
 
     @GetMapping
-    public ResponseEntity<List<EmpleadosResponseDTO>> obtenerTodos() {
+    public ResponseEntity<List<EmpleadosGetDTO>> obtenerTodos() {
         return ResponseEntity.ok(empleadoServicio.obtenerTodos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmpleadosResponseDTO> obtenerEmpleado(@PathVariable Long id) {
+    public ResponseEntity<EmpleadosGetDTO> obtenerEmpleado(@PathVariable Long id) {
         return ResponseEntity.ok(empleadoServicio.obtenerPorId(id));
     }
 
     //Ya se entiende que es insertar
     @PostMapping()
-    public ResponseEntity<EmpleadosResponseDTO> insertarEmpleado(@RequestBody EmpleadosRegisterDTO dto) {
+    public ResponseEntity<EmpleadosGetDTO> insertarEmpleado(@RequestBody EmpleadosPostDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(empleadoServicio.insertarEmpleado(dto));
     }
 

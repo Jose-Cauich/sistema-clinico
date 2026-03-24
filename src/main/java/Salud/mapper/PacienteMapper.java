@@ -1,7 +1,7 @@
 package Salud.mapper;
 import Salud.dtos.Direccion.DireccionDTO;
-import Salud.dtos.Paciente.PacienteRegisterDTO;
-import Salud.dtos.Paciente.PacienteResponseDTO;
+import Salud.dtos.Paciente.PacientePostDTO;
+import Salud.dtos.Paciente.PacienteGetDTO;
 import Salud.dtos.Paciente.PacienteUpdateDTO;
 import Salud.entity.*;
 import Salud.enums.Genero;
@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 public class PacienteMapper {
 
     //convertir entity a dto
-    public static PacienteResponseDTO toDtoGet(PacientesEntity pacientesEntity) {
+    public static PacienteGetDTO toDtoGet(PacientesEntity pacientesEntity) {
 
         if (pacientesEntity == null) {
             return null;
         }
 
-        PacienteResponseDTO dto = new PacienteResponseDTO();
+        PacienteGetDTO dto = new PacienteGetDTO();
         dto.setIdPaciente(pacientesEntity.getIdPaciente());
         dto.setIdNutriologa(pacientesEntity.getNutriologa().getIdNutriologa());
         dto.setNombres(pacientesEntity.getNombres());
@@ -37,20 +37,20 @@ public class PacienteMapper {
         return dto;
     }
 
-    public static PacientesEntity toEntity(PacienteRegisterDTO pacienteRegisterDTO, NutriologasEntity nutriologa, Genero genero) {
+    public static PacientesEntity toEntity(PacientePostDTO pacientePostDTO, NutriologasEntity nutriologa, Genero genero) {
 
 
-        if (pacienteRegisterDTO == null) {return null;}
+        if (pacientePostDTO == null) {return null;}
 
         PacientesEntity pacientesEntity = new PacientesEntity();
-        pacientesEntity.setNombres(pacienteRegisterDTO.getNombres());
-        pacientesEntity.setApellidoPaterno(pacienteRegisterDTO.getApellidoPaterno());
-        pacientesEntity.setApellidoMaterno(pacienteRegisterDTO.getApellidoMaterno());
-        pacientesEntity.setFechaNacimiento(pacienteRegisterDTO.getFechaNacimiento());
-        pacientesEntity.setTelefono(pacienteRegisterDTO.getTelefono());
-        pacientesEntity.setCorreo(pacienteRegisterDTO.getCorreo());
-        pacientesEntity.setPasswordHash(pacienteRegisterDTO.getPasswordHash());
-        pacientesEntity.setFechaNacimiento(pacienteRegisterDTO.getFechaNacimiento());
+        pacientesEntity.setNombres(pacientePostDTO.getNombres());
+        pacientesEntity.setApellidoPaterno(pacientePostDTO.getApellidoPaterno());
+        pacientesEntity.setApellidoMaterno(pacientePostDTO.getApellidoMaterno());
+        pacientesEntity.setFechaNacimiento(pacientePostDTO.getFechaNacimiento());
+        pacientesEntity.setTelefono(pacientePostDTO.getTelefono());
+        pacientesEntity.setCorreo(pacientePostDTO.getCorreo());
+        pacientesEntity.setPasswordHash(pacientePostDTO.getPasswordHash());
+        pacientesEntity.setFechaNacimiento(pacientePostDTO.getFechaNacimiento());
         pacientesEntity.setFechaRegistro(LocalDateTime.now()); //asigancion de hora y fecha del sistema
         pacientesEntity.setActivo(true);
         pacientesEntity.setGenero(genero);
@@ -60,7 +60,7 @@ public class PacienteMapper {
         //asignar pacientes al registrar
         pacientesEntity.setNutriologa(nutriologa);
 
-        pacientesEntity.setDireccion(DireccionesMapper.toEntity(pacienteRegisterDTO.getDireccion()));
+        pacientesEntity.setDireccion(DireccionesMapper.toEntity(pacientePostDTO.getDireccion()));
 
         return pacientesEntity;
     }

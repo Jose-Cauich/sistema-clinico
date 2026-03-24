@@ -1,7 +1,7 @@
 package Salud.service;
 
-import Salud.dtos.Paciente.PacienteRegisterDTO;
-import Salud.dtos.Paciente.PacienteResponseDTO;
+import Salud.dtos.Paciente.PacientePostDTO;
+import Salud.dtos.Paciente.PacienteGetDTO;
 import Salud.dtos.Paciente.PacienteUpdateDTO;
 import Salud.entity.NutriologasEntity;
 import Salud.entity.PacientesEntity;
@@ -26,16 +26,16 @@ public class PacienteServicio {
     @Autowired
     NutriologaRepository nutriologaRepository;
 
-    public List<PacienteResponseDTO> obtenerTodos() {
+    public List<PacienteGetDTO> obtenerTodos() {
         return pacienteRepository.findAll().stream().map(PacienteMapper::toDtoGet).collect(Collectors.toList());
     }
 
-    public PacienteResponseDTO obtenerPorId(Long id) {
+    public PacienteGetDTO obtenerPorId(Long id) {
         PacientesEntity patient = pacienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
         return PacienteMapper.toDtoGet(patient);
     }
 
-    public PacienteResponseDTO insertarPaciente(PacienteRegisterDTO dto) {
+    public PacienteGetDTO insertarPaciente(PacientePostDTO dto) {
         //objetos-relación
         NutriologasEntity nutriologasEntity = nutriologaRepository.findById(dto.getIdNutriologa()).orElseThrow(()->new RuntimeException("Nutrióloga no encontrada"));
         Genero genero = dto.getGenero();

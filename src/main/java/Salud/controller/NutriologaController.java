@@ -1,8 +1,8 @@
 package Salud.controller;
 
-import Salud.dtos.Nutricionista.NutriologaResponseDTO;
+import Salud.dtos.Nutricionista.NutriologaGetDTO;
 import Salud.dtos.Nutricionista.NutriologaUpdateDTO;
-import Salud.dtos.Nutricionista.NutriologalRegisterDTO;
+import Salud.dtos.Nutricionista.NutriologalPostDTO;
 import Salud.service.NutriologaServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,18 +20,18 @@ public class NutriologaController {
     private final NutriologaServicio nutricionistaServicio;
 
     @GetMapping("/todos")
-    public ResponseEntity<List<NutriologaResponseDTO>> obtenerTodos() {
+    public ResponseEntity<List<NutriologaGetDTO>> obtenerTodos() {
         return ResponseEntity.ok(nutricionistaServicio.obtenerTodos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NutriologaResponseDTO> obtenerNutriologa(@PathVariable Long id) {
+    public ResponseEntity<NutriologaGetDTO> obtenerNutriologa(@PathVariable Long id) {
         return ResponseEntity.ok(nutricionistaServicio.obtenerPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<NutriologaResponseDTO> insertarNutriologa(@RequestBody NutriologalRegisterDTO nutriologalRegisterDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(nutricionistaServicio.insertarNutricionista(nutriologalRegisterDTO));
+    public ResponseEntity<NutriologaGetDTO> insertarNutriologa(@RequestBody NutriologalPostDTO nutriologalPostDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(nutricionistaServicio.insertarNutricionista(nutriologalPostDTO));
     }
 
     //Ya se entiende que es Actualizar

@@ -1,9 +1,9 @@
 package Salud.mapper;
 
 import Salud.dtos.Direccion.DireccionDTO;
-import Salud.dtos.Nutricionista.NutriologaResponseDTO;
+import Salud.dtos.Nutricionista.NutriologaGetDTO;
 import Salud.dtos.Nutricionista.NutriologaUpdateDTO;
-import Salud.dtos.Nutricionista.NutriologalRegisterDTO;
+import Salud.dtos.Nutricionista.NutriologalPostDTO;
 import Salud.entity.DireccionesEntity;
 import Salud.entity.NutriologasEntity;
 import Salud.enums.Genero;
@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @Slf4j
 public class NutricionistaMapper {
 
-    public static NutriologaResponseDTO toGetDto(NutriologasEntity entity) {
+    public static NutriologaGetDTO toGetDto(NutriologasEntity entity) {
         if (entity == null) return null;
 
-        NutriologaResponseDTO dto = new NutriologaResponseDTO();
+        NutriologaGetDTO dto = new NutriologaGetDTO();
 
         dto.setNombres(entity.getNombres());
         dto.setApellidoPaterno(entity.getApellidoPaterno());
@@ -36,7 +36,7 @@ public class NutricionistaMapper {
         return dto;
     }
 
-    public static NutriologasEntity toEntity(NutriologalRegisterDTO dto, Genero genero) {
+    public static NutriologasEntity toEntity(NutriologalPostDTO dto, Genero genero) {
 
         if (dto == null) return null;
 

@@ -1,21 +1,24 @@
-package Salud.dtos.Empleados;
+package Salud.dtos.Nutricionista;
 
 import Salud.dtos.Direccion.DireccionDTO;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class EmpleadosRegisterDTO {
+public class NutriologaGetDTO {
+
+    private Long idNutriologa;
+    private Long idUsuario;
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private LocalDateTime fechaNacimiento;
-    private String correo;
+    private String cedulaProfesional;
+    private LocalDate fechaNacimiento;
+    private String genero;
     private String telefono;
-    private String passwordHash;
-    private Long idRol; // El ID del rol (Admin o Recepcionista)
+    private String correo;
     private LocalDateTime fechaRegistro;
     private DireccionDTO direccion;
-    private boolean activo;
 }

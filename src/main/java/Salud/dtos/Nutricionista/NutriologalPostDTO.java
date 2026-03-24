@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
     @Data
-    public class NutriologalRegisterDTO {
+    public class NutriologalPostDTO {
 
         private String nombres;
         private String apellidoPaterno;

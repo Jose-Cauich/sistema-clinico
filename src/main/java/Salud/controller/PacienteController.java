@@ -1,7 +1,7 @@
 package Salud.controller;
 
-import Salud.dtos.Paciente.PacienteRegisterDTO;
-import Salud.dtos.Paciente.PacienteResponseDTO;
+import Salud.dtos.Paciente.PacientePostDTO;
+import Salud.dtos.Paciente.PacienteGetDTO;
 import Salud.dtos.Paciente.PacienteUpdateDTO;
 import Salud.service.PacienteServicio;
 import lombok.RequiredArgsConstructor;
@@ -19,19 +19,19 @@ public class PacienteController {
     private final PacienteServicio pacienteServicio;
 
     @GetMapping("/todos")
-    public ResponseEntity<List<PacienteResponseDTO>> obtenerTodos() {
+    public ResponseEntity<List<PacienteGetDTO>> obtenerTodos() {
         return ResponseEntity.ok(pacienteServicio.obtenerTodos());
     }
 
     //Ya se entiende que es obtener
     @GetMapping("/{id}")
-    public ResponseEntity<PacienteResponseDTO> obtenerPaciente(@PathVariable Long id) {
+    public ResponseEntity<PacienteGetDTO> obtenerPaciente(@PathVariable Long id) {
         return ResponseEntity.ok(pacienteServicio.obtenerPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<PacienteResponseDTO> insertarPaciente(@RequestBody PacienteRegisterDTO pacienteRegisterDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteServicio.insertarPaciente(pacienteRegisterDTO));
+    public ResponseEntity<PacienteGetDTO> insertarPaciente(@RequestBody PacientePostDTO pacientePostDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteServicio.insertarPaciente(pacientePostDTO));
     }
 
     @PutMapping("/{id}")

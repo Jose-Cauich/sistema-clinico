@@ -1,23 +1,21 @@
 package Salud.mapper;
 
-import Salud.dtos.Empleados.EmpleadosRegisterDTO;
-import Salud.dtos.Empleados.EmpleadosResponseDTO;
+import Salud.dtos.Empleados.EmpleadosPostDTO;
+import Salud.dtos.Empleados.EmpleadosGetDTO;
 import Salud.dtos.Empleados.EmpleadosUpdateDTO;
 import Salud.dtos.Direccion.DireccionDTO;
 import Salud.entity.DireccionesEntity;
 import Salud.entity.EmpleadosEntity;
 import Salud.entity.RolEntity;
-import Salud.enums.Genero;
-import Salud.enums.NombreRol;
 
 import java.time.LocalDateTime;
 
 public class EmpleadoMapper {
 
-    public static EmpleadosResponseDTO toDtoGet(EmpleadosEntity entity) {
+    public static EmpleadosGetDTO toDtoGet(EmpleadosEntity entity) {
         if (entity == null) return null;
 
-        EmpleadosResponseDTO dto = new EmpleadosResponseDTO();
+        EmpleadosGetDTO dto = new EmpleadosGetDTO();
         dto.setNombres(entity.getNombres());
         dto.setApellidoPaterno(entity.getApellidoPaterno());
         dto.setApellidoMaterno(entity.getApellidoMaterno());
@@ -31,7 +29,7 @@ public class EmpleadoMapper {
         return dto;
     }
 
-    public static EmpleadosEntity toEntity(EmpleadosRegisterDTO dto, RolEntity rol) {
+    public static EmpleadosEntity toEntity(EmpleadosPostDTO dto, RolEntity rol) {
         if (dto == null) return null;
 
         EmpleadosEntity entity = new EmpleadosEntity();
