@@ -1,11 +1,6 @@
 
 **Sistema de Gestión de Salud**
  
-> PROYECTO EN DESARROLLO
-> Este proyecto esta en construcción. Algunas funcionalidades todavía no están implementadas.
- 
-→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→→
- 
 **Descripción**
  
 Sistema de gestión de salud desarrollado con Spring Boot y PostgreSQL. Administra tres tipos de perfiles: Pacientes, Nutriólogas y Personal Administrativo.
